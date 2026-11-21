@@ -1,0 +1,74 @@
+<?php
+/**
+ * @var \Magento\Backend\Block\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+/** @var \StorvixLabs\AdminActionLog\ViewModel\LogView $viewModel */
+$viewModel = $block->getData('view_model');
+$entry = $viewModel->getEntry();
+if (!$entry) {
+    return;
+}
+$changes = $viewModel->getChanges();
+?>
+<div class="page-actions-buttons">
+    <a class="action-default back" href="<?= $escaper->escapeUrl($viewModel->getBackUrl()) ?>">
+        <span><?= $escaper->escapeHtml(__('Back')) ?></span>
+    </a>
+</div>
+
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $escaper->escapeHtml(__('Details')) ?></span>
+    </div>
+    <table class="admin__table-secondary">
+        <tbody>
+        <tr><th><?= $escaper->escapeHtml(__('Date')) ?></th><td><?= $escaper->escapeHtml($viewModel->getFormattedDate()) ?></td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('User')) ?></th>
+            <td><?= $escaper->escapeHtml($entry['username'] ?? '') ?>
+                (<?= $escaper->escapeHtml($entry['user_type'] ?? '') ?>)</td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('IP Address')) ?></th><td><?= $escaper->escapeHtml($entry['ip'] ?? '') ?></td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('Action')) ?></th><td><?= $escaper->escapeHtml($viewModel->getActionLabel()) ?></td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('Entity')) ?></th><td><?= $escaper->escapeHtml($entry['entity_type'] ?? '') ?></td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('Record')) ?></th>
+            <td><?= $escaper->escapeHtml($entry['entity_label'] ?? '') ?>
+                <?php if (!empty($entry['entity_id'])): ?>
+                    (ID <?= $escaper->escapeHtml($entry['entity_id']) ?>)
+                <?php endif; ?></td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('Source')) ?></th>
+            <td><?= $escaper->escapeHtml($entry['area'] ?? '') ?> &middot;
+                <?= $escaper->escapeHtml($entry['request_path'] ?? '') ?></td></tr>
+        </tbody>
+    </table>
+</section>
+
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $escaper->escapeHtml(__('Changes')) ?></span>
+    </div>
+    <?php if (!$changes): ?>
+        <p><?= $escaper->escapeHtml(__('No field changes recorded for this action.')) ?></p>
+    <?php else: ?>
+        <div class="admin__table-wrapper">
+            <table class="data-table admin__table-primary">
+                <thead>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Field')) ?></th>
+                    <th><?= $escaper->escapeHtml(__('Old Value')) ?></th>
+                    <th><?= $escaper->escapeHtml(__('New Value')) ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($changes as $change): ?>
+                    <tr>
+                        <td><strong><?= $escaper->escapeHtml((string)($change['field'] ?? '')) ?></strong></td>
+                        <td><?= nl2br($escaper->escapeHtml((string)($change['old'] ?? ''))) ?></td>
+                        <td><?= nl2br($escaper->escapeHtml((string)($change['new'] ?? ''))) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif; ?>
+</section>

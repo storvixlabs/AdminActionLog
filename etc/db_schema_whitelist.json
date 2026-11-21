@@ -1,0 +1,28 @@
+{
+    "storvixlabs_admin_action_log": {
+        "column": {
+            "log_id": true,
+            "created_at": true,
+            "user_type": true,
+            "user_id": true,
+            "username": true,
+            "ip": true,
+            "area": true,
+            "action": true,
+            "entity_type": true,
+            "entity_id": true,
+            "entity_label": true,
+            "request_path": true,
+            "changes": true
+        },
+        "index": {
+            "STORVIXLABS_ADMIN_ACTION_LOG_CREATED_AT": true,
+            "STORVIXLABS_ADMIN_ACTION_LOG_ENTITY_TYPE_ENTITY_ID": true,
+            "STORVIXLABS_ADMIN_ACTION_LOG_USERNAME": true,
+            "STORVIXLABS_ADMIN_ACTION_LOG_ACTION": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

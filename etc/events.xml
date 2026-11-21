@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- Global so admin token / integration API calls are covered too; the Tracker checks the area. -->
+    <event name="model_save_before">
+        <observer name="storvixlabs_actionlog_save_before" instance="StorvixLabs\AdminActionLog\Observer\ModelSaveBefore"/>
+    </event>
+    <event name="model_save_after">
+        <observer name="storvixlabs_actionlog_save_after" instance="StorvixLabs\AdminActionLog\Observer\ModelSaveAfter"/>
+    </event>
+    <event name="model_delete_after">
+        <observer name="storvixlabs_actionlog_delete_after" instance="StorvixLabs\AdminActionLog\Observer\ModelDeleteAfter"/>
+    </event>
+</config>

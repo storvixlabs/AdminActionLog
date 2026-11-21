@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <storvixlabs_actionlog>
+            <general>
+                <enabled>1</enabled>
+                <log_logins>1</log_logins>
+                <log_api>1</log_api>
+                <retention_days>180</retention_days>
+            </general>
+        </storvixlabs_actionlog>
+    </default>
+</config>

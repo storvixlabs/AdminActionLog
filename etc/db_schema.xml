@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="storvixlabs_admin_action_log" resource="default" engine="innodb" comment="StorvixLabs Admin Action Log">
+        <column xsi:type="int" name="log_id" unsigned="true" nullable="false" identity="true" comment="Log ID"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Created At (UTC)"/>
+        <column xsi:type="varchar" name="user_type" length="16" nullable="false" default="admin" comment="admin or integration"/>
+        <column xsi:type="int" name="user_id" unsigned="true" nullable="true" comment="Admin user or integration ID"/>
+        <column xsi:type="varchar" name="username" length="255" nullable="true" comment="Username at the time of the action"/>
+        <column xsi:type="varchar" name="ip" length="45" nullable="true" comment="IP address"/>
+        <column xsi:type="varchar" name="area" length="32" nullable="true" comment="Magento area"/>
+        <column xsi:type="varchar" name="action" length="32" nullable="false" comment="Action"/>
+        <column xsi:type="varchar" name="entity_type" length="64" nullable="false" comment="Entity type label"/>
+        <column xsi:type="varchar" name="entity_id" length="64" nullable="true" comment="Entity ID"/>
+        <column xsi:type="varchar" name="entity_label" length="255" nullable="true" comment="Human-readable record name"/>
+        <column xsi:type="varchar" name="request_path" length="255" nullable="true" comment="Admin action or API route"/>
+        <column xsi:type="mediumtext" name="changes" nullable="true" comment="JSON list of field changes"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="log_id"/>
+        </constraint>
+        <index referenceId="STORVIXLABS_ADMIN_ACTION_LOG_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+        <index referenceId="STORVIXLABS_ADMIN_ACTION_LOG_ENTITY_TYPE_ENTITY_ID" indexType="btree">
+            <column name="entity_type"/>
+            <column name="entity_id"/>
+        </index>
+        <index referenceId="STORVIXLABS_ADMIN_ACTION_LOG_USERNAME" indexType="btree">
+            <column name="username"/>
+        </index>
+        <index referenceId="STORVIXLABS_ADMIN_ACTION_LOG_ACTION" indexType="btree">
+            <column name="action"/>
+        </index>
+    </table>
+</schema>

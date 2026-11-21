@@ -1,0 +1,24 @@
+{
+    "name": "storvixlabs/module-admin-action-log",
+    "description": "Records who changed what in the Magento admin and through admin/integration API calls, with before/after values, login history and retention.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "proprietary",
+    "require": {
+        "php": "~8.3.0||~8.4.0||~8.5.0",
+        "magento/framework": "*",
+        "magento/module-backend": "*",
+        "magento/module-catalog": "*",
+        "magento/module-config": "*",
+        "magento/module-integration": "*",
+        "magento/module-store": "*",
+        "magento/module-ui": "*",
+        "magento/module-user": "*"
+    },
+    "autoload": {
+        "files": ["registration.php"],
+        "psr-4": {
+            "StorvixLabs\\AdminActionLog\\": ""
+        }
+    }
+}

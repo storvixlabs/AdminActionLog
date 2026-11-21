@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="backend_auth_user_login_success">
+        <observer name="storvixlabs_actionlog_login_success" instance="StorvixLabs\AdminActionLog\Observer\AdminLoginSuccess"/>
+    </event>
+    <event name="backend_auth_user_login_failed">
+        <observer name="storvixlabs_actionlog_login_failed" instance="StorvixLabs\AdminActionLog\Observer\AdminLoginFailed"/>
+    </event>
+</config>
